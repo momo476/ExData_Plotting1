@@ -25,13 +25,15 @@ plotdatadf2_filtered <- mutate(plotdatadf2_filtered,timestamp = format(as.POSIXc
 plotdatadf2_filtered <- mutate(plotdatadf2_filtered,timestamp = ymd_hms(timestamp))
 
 
+##Save to png file format
+png("plot3.png", width = 480, height = 480)
+
 ## Draws plot with 3 lines and add a legend
 
 with(plotdatadf2_filtered, plot(timestamp, Sub_metering_1, type = "l", xlab = NA, ylab = "Energy sub metering"))
 with(plotdatadf2_filtered, lines(timestamp, Sub_metering_2, type = "l", col = "red"))
 with(plotdatadf2_filtered, lines(timestamp, Sub_metering_3, type = "l", col = "blue"))
-legend("topright",legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lty = 1, col = c("black","red","blue"), ncol =1)
+legend("topright",legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lty = 1,lwd=2, col = c("black","red","blue"), ncol =1)
 
 
-##Save to png file format
-png("plot3.png", width = 480, height = 480)
+dev.off()

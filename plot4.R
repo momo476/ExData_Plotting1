@@ -23,12 +23,16 @@ plotdatadf2_filtered <- filter(plotdatadf,Date == "2007-02-01" | Date == "2007-0
 plotdatadf2_filtered <- mutate(plotdatadf2_filtered,timestamp = format(as.POSIXct(paste(Date,Time)),"%Y/%m/%d %H:%M:%S"))
 plotdatadf2_filtered <- mutate(plotdatadf2_filtered,timestamp = ymd_hms(timestamp))
 
+
+##Save to png file format
+png("plot4.png", width = 480, height = 480)
+
+
 ## Plots charts in a 2x2 matrix
 par(mfrow = c(2, 2))
 
 
 ## Plots to be plotted
-
 ##1
 with(plotdatadf2_filtered, plot(timestamp,Global_active_power,ylab = "Global Active Power", xlab = NA, type= "l"))
 
@@ -39,11 +43,10 @@ with(plotdatadf2_filtered, plot(timestamp,Voltage,xlab = "datetime", type= "l"))
 with(plotdatadf2_filtered, plot(timestamp, Sub_metering_1, type = "l", xlab = NA, ylab = "Energy sub metering"))
 with(plotdatadf2_filtered, lines(timestamp, Sub_metering_2, type = "l", col = "red"))
 with(plotdatadf2_filtered, lines(timestamp, Sub_metering_3, type = "l", col = "blue"))
-legend("topright",legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lty = 1, col = c("black","red","blue"), ncol =1)
+legend("topright",legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lty = 1, lwd = 2, col = c("black","red","blue"), ncol =1)
 
 ##4
 with(plotdatadf2_filtered, plot(timestamp,Global_reactive_power,ylab = "Global Rective Power", xlab = "datetime", type= "l"))
 
 
-##Save to png file format
-png("plot3.png", width = 480, height = 480)
+dev.off()

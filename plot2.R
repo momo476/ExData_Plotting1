@@ -18,15 +18,20 @@ plotdatadf <- tbl_df(plotdata_2) ##converts data frame to tbl_df
 plotdatadf2_filtered <- filter(plotdatadf,Date == "2007-02-01" | Date == "2007-02-02")  ##Filter out relevant dates
 
 
+
 ## The following code creates a new column named timestamp, where date and time are combined
 ## timestamp values are then converted into datetime variable
 
 plotdatadf2_filtered <- mutate(plotdatadf2_filtered,timestamp = format(as.POSIXct(paste(Date,Time)),"%Y/%m/%d %H:%M:%S"))
 plotdatadf2_filtered <- mutate(plotdatadf2_filtered,timestamp = ymd_hms(timestamp))
 
+
+##Save to png file format
+png("plot2.png", width = 480, height = 480)
+
+
 #Creates plot
 with(plotdatadf2_filtered, plot(timestamp, Global_active_power, xlab = NA, ylab = "Global Active Power (kilowatts)" ,type = "l"))
 
 
-##Save to png file format
-png("plot2.png", width = 480, height = 480)
+dev.off()

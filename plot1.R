@@ -12,10 +12,13 @@ plotdatadf <- tbl_df(plotdata_2) ##converts data frame to tbl_df
 
 plotdatadf2_filtered <- filter(plotdatadf,Date == "2007-02-01" | Date == "2007-02-02")  ##Filter out relevant dates
 
-hist(plotdatadf2_filtered$Global_active_power, col= "red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")  ##plots the graph
-
 ##Save to png file format
 png("plot1.png", width = 480, height = 480)
 
+
+hist(plotdatadf2_filtered$Global_active_power, col= "red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")  ##plots the graph
+
+
+dev.off()
 
   
